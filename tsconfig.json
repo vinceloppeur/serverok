@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "ES6",
-		"module": "CommonJS",
+		"module": "Node16",
 		"strict": true,
 		"strictNullChecks": true,
 		"skipLibCheck": true,
