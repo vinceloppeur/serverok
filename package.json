@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/vinceloppeur/serverok/issues"
   },
-  "homepage": "https://github.com/vinceloppeur/serverok#readme"
+  "homepage": "https://github.com/vinceloppeur/serverok#readme",
+  "devDependencies": {
+    "@types/node": "^20.12.14"
+  }
 }
