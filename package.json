@@ -1,0 +1,26 @@
+{
+  "name": "serverok",
+  "version": "0.0.1",
+  "description": "Serve your files/folder locally or over a network",
+  "main": "dist/lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinceloppeur/serverok.git"
+  },
+  "keywords": [
+    "serverok",
+    "ngrok",
+    "server",
+    "file",
+    "folder"
+  ],
+  "author": "vinceloppeur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vinceloppeur/serverok/issues"
+  },
+  "homepage": "https://github.com/vinceloppeur/serverok#readme"
+}
