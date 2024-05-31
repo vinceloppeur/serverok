@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "CommonJS",
+		"strict": true,
+		"strictNullChecks": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"lib": ["ES2015"],
+		"outDir": "dist/lib",
+		"sourceMap": true
+	},
+	"include": ["src/**/*"]
+}
