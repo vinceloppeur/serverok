@@ -5,7 +5,7 @@
 	"main": "dist/lib/src/index.js",
 	"bin": "dist/lib/src/index.js",
 	"scripts": {
-		"build": "tsc && npm link",
+		"build": "tsc && ncp src/views dist/lib/src/views && npm link",
 		"dev": "nodemon"
 	},
 	"repository": {
@@ -40,6 +40,7 @@
 		"express": "^4.19.2",
 		"http-status": "^1.7.4",
 		"morgan": "^1.10.0",
+		"ncp": "^2.0.0",
 		"ngrok": "^5.0.0-beta.2",
 		"validator": "^13.12.0"
 	},
