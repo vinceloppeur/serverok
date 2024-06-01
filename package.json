@@ -47,6 +47,6 @@
 	"nodemonConfig": {
 		"ignore": "dist/**/*",
 		"ext": ".js,.ts,.json,.css",
-		"exec": "npm run build && serverok serve ."
+		"exec": "npm run build && serverok serve . || exit 1"
 	}
 }
