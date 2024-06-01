@@ -6,7 +6,8 @@
 	"bin": "dist/lib/src/index.js",
 	"scripts": {
 		"build": "tsc && ncp src/views dist/lib/src/views && npm link",
-		"dev": "nodemon"
+		"dev:serve": "nodemon --ignore \"dist/**/*\" --ext \".js,.ts,.json,.css,.ejs\" --exec \"npm run build && serverok serve . || exit 1\"",
+		"dev:auth": "nodemon --ignore \"dist/**/*\" --ext \".js,.ts,.json,.css,.ejs\" --exec \"npm run build && serverok auth || exit 1\""
 	},
 	"repository": {
 		"type": "git",
@@ -45,10 +46,5 @@
 		"ngrok": "^5.0.0-beta.2",
 		"source-map-support": "^0.5.21",
 		"validator": "^13.12.0"
-	},
-	"nodemonConfig": {
-		"ignore": "dist/**/*",
-		"ext": ".js,.ts,.json,.css,.ejs",
-		"exec": "npm run build && serverok serve . || exit 1"
 	}
 }
