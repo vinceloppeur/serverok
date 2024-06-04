@@ -1,0 +1,32 @@
+main {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.file {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	background-color: white;
+	color: #00a86b;
+	padding: 0.5rem 2rem;
+	border-radius: 0.25rem;
+}
+
+.file div span {
+	color: grey;
+	font-size: 0.75rem;
+}
+
+.url * {
+	color: white;
+}
+
+.url {
+	background-color: #00a86b;
+	width: fit-content;
+	padding: 0.25rem 1rem;
+	border-radius: 0.25rem;
+}

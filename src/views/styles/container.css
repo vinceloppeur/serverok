@@ -1,0 +1,42 @@
+.container--folder,
+.container--file {
+	display: flex;
+	flex-flow: column;
+	gap: 0.5rem;
+}
+
+.container--file {
+	margin: 1rem 0 0 0;
+	padding: 0 0 0 2rem;
+}
+
+.folder,
+.file {
+	transition: transform 0.1s ease-in-out;
+}
+
+.folder:hover,
+.file:hover {
+	transform: scale(1.1);
+}
+
+.folder:active,
+.file:active {
+	transform: scale(1.05);
+}
+
+.folder {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	border-radius: 0.25rem;
+	background: white;
+	width: fit-content;
+	padding: 0.5rem 1rem;
+	color: black;
+}
+
+.file {
+	width: fit-content;
+	color: white;
+}

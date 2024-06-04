@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serverok</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/navbar.css">
+  <link rel="stylesheet" href="/styles/container.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <%- include("templates/navbar.ejs") %>
+  <main>
+    <% if (folders.length> 0) { %>
+      <div class="container--folder">
+        <% folders.forEach((folder)=> { %>
+          <a href="<%= folder.path %>" class="folder" title="<%= folder.path %>">
+            <i class="fa-solid fa-caret-right"></i>
+            <i class="fa-regular fa-folder"></i>
+            <%= folder.name %>
+          </a>
+        <% }); %>
+      </div>
+    <% } %>
+    <% if (files.length> 0) { %>
+      <div class="container--file">
+        <% files.forEach(file=> { %>
+          <a href="<%= file.path %>" class="file">
+            <%= file.name %>
+          </a>
+          <hr />
+        <% }); %>
+      </div>
+    <% } %>
+    <form method="post" class="container--navigation" style="position: fixed; bottom: 2rem; right: 2rem;">
+      <% if (downloadUrl) { %>
+        <div class="url">
+          <a href="<%= downloadUrl %>" target="_blank"><i class="fa-regular fa-copy" style="margin-right: 0.5rem;"></i>
+            <%= downloadUrl %>
+          </a>
+        </div>
+      <% } %>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <% if (!root) { %>
+          <a href="../" class="navigation-back">Back</a>
+        <% } %>
+        <input class="navigation-share" type="submit" value="Share Folder">
+      </div>
+    </form>
+  </main>
+</body>
+
+</html>
