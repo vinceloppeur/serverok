@@ -40,7 +40,6 @@
 		"commander": "^12.1.0",
 		"ejs": "^3.1.10",
 		"express": "^4.19.2",
-		"http-status": "^1.7.4",
 		"morgan": "^1.10.0",
 		"ncp": "^2.0.0",
 		"source-map-support": "^0.5.21"
