@@ -3,7 +3,9 @@
 	"version": "0.0.1",
 	"description": "Serve your files/folder locally or over a network",
 	"main": "dist/lib/src/index.js",
-	"bin": "dist/lib/src/index.js",
+	"bin": {
+		"serverok": "dist/lib/src/index.js"
+	},
 	"scripts": {
 		"build": "tsc && ncp src/views dist/lib/src/views && npm link",
 		"dev:serve": "nodemon --ignore \"dist/**/*\" --ext \".js,.ts,.json,.css,.ejs\" --exec \"npm run build && serverok serve . || exit 1\"",
