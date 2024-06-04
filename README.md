@@ -7,8 +7,7 @@
 <p align="center">
   <img alt="language typescript" src="https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square" />
   <img alt="license MIT" src="https://img.shields.io/badge/license-MIT-blue" />
-  <img alt="package.json version" src="https://img.shields.io/github/package-json/v/vinceloppeur/serverok
-  " />
+  <img alt="package.json version" src="https://img.shields.io/github/package-json/v/vinceloppeur/serverok" />
 </p>
 
 Serve your files/folders locally or over a network.
