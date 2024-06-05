@@ -150,7 +150,7 @@ async function directoryOrFile(from: string) {
 			return {
 				name: inode.name,
 				isDirectory: inode.isDirectory(),
-				path: path.resolve("/", path.relative(inode.name, from), inode.name),
+				path: path.posix.resolve("/", path.relative(inode.name, from), inode.name),
 			};
 		});
 		const folders = inodes.filter((inode) => inode.isDirectory);
