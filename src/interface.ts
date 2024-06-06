@@ -1,9 +1,10 @@
 import express from "express";
 import path from "node:path";
+import stream from "node:stream";
 import fs from "node:fs/promises";
 import EventEmitter from "node:events";
 import morgan from "morgan";
-import admZip from "adm-zip";
+import archiver from "archiver";
 
 namespace Interface {
 	type URL = string;
@@ -38,6 +39,27 @@ namespace Interface {
 		): boolean {
 			return super.emit(eventName, ...args);
 		}
+	}
+}
+
+class WriteFile extends stream.Writable {
+	filename: string = "folder.zip";
+
+	private buf: Buffer = Buffer.alloc(0);
+
+	constructor(filename: string, options?: stream.WritableOptions) {
+		super(options);
+
+		this.filename = filename;
+	}
+
+	_write(chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void {
+		this.buf = Buffer.concat([this.buf, chunk]);
+		callback();
+	}
+
+	create(): File {
+		return new File([this.buf], this.filename);
 	}
 }
 
@@ -133,15 +155,30 @@ export default async function main(port: number, serve_path: string) {
 	return itf;
 }
 
-async function createZipFromFolder(folder_path: string) {
-	const zip = new admZip();
+function createZipFromFolder(folder_path: string): Promise<File> {
+	return new Promise((res, rej) => {
+		const zip = archiver("zip");
+		const file = new WriteFile(path.basename(folder_path) + ".zip");
 
-	await zip.addLocalFolderPromise(folder_path, {});
+		let total_size = 0;
 
-	const buf = await zip.toBufferPromise();
-	const file = new File([buf], path.basename(folder_path) + ".zip");
+		zip.on("data", (chunk) => {
+			const size = chunk.length / 1024 / 1000; // size in megabytes
 
-	return file;
+			total_size += size;
+
+			console.clear();
+			console.log("progress:", total_size, "MB");
+			console.log("archiving...");
+		});
+		zip.on("close", () => console.log("archive finished.."));
+		zip.on("error", rej);
+
+		zip.pipe(file).on("close", () => res(file.create()));
+
+		zip.directory(folder_path, false);
+		zip.finalize();
+	});
 }
 
 async function directoryOrFile(from: string, relativePath: string) {
