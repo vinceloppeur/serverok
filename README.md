@@ -46,7 +46,7 @@ serverok serve [path]
 You can also pass these options, for example:
 
 ```bash
-serverok serve [path] --port [number] --interface-port [number]
+serverok serve <path> --port [number] --interface-port [number]
 ```
 
 - _--port_ : the port that will be forwarded and used to download your file. (_default: 3004_)
