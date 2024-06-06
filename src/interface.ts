@@ -62,7 +62,7 @@ export default async function main(port: number, serve_path: string) {
 		.get(async (req, res) => {
 			try {
 				const read = path.join(serve, req.params.position); // the path to read the contents inside
-				const ent = await directoryOrFile(read);
+				const ent = await directoryOrFile(read, req.url);
 				const options = { root: req.params.position === "", downloadUrl: null, download: false }; // the default options
 
 				if (ent instanceof Buffer) {
@@ -82,7 +82,7 @@ export default async function main(port: number, serve_path: string) {
 		.post(async (req, res) => {
 			try {
 				const read = path.join(serve, req.params.position);
-				const ent = await directoryOrFile(read);
+				const ent = await directoryOrFile(read, req.url);
 				const options: { root: boolean; downloadUrl: null | string; download: boolean } = {
 					root: req.params.position === "",
 					downloadUrl: null,
@@ -140,7 +140,7 @@ async function createZipFromFolder(folder_path: string) {
 	return file;
 }
 
-async function directoryOrFile(from: string) {
+async function directoryOrFile(from: string, relativePath: string) {
 	const directoryOrFile = await fs
 		.readdir(from, { withFileTypes: true })
 		.catch(async () => await fs.readFile(from));
@@ -150,7 +150,7 @@ async function directoryOrFile(from: string) {
 			return {
 				name: inode.name,
 				isDirectory: inode.isDirectory(),
-				path: path.posix.resolve("/", path.relative(inode.name, from), inode.name),
+				path: path.posix.join(relativePath, inode.name),
 			};
 		});
 		const folders = inodes.filter((inode) => inode.isDirectory);
