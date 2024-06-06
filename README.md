@@ -16,9 +16,9 @@ Serve your files/folders locally or over a network.
 
 It uses [ngrok-javascript](https://www.npmjs.com/package/@ngrok/ngrok) to create a tunnel to your localhost.
 
-An interface will be created where you can choose which file/folder you want to share.
+There will be an interface where you can choose which file/folder you want to share.
 
-A `.zip` file will be created when you want to share a folder instead of a file so you don't have to compress it beforehand.
+A `.zip` file will be created when you want to share a folder instead of a file so you don't have to compress it beforehand (_although it is recommended for you to just zip it yourself_)
 
 ## Install
 
@@ -28,13 +28,14 @@ npm install -g serverok
 
 ## Authentication
 
-_Before you can use this, you must first have an [ngrok](https://ngrok.com) account and get your auth token._
 
 ```bash
 serverok auth --token [your_auth_token]
 ```
 
-Or you can just run the command without passing any options and it will prompt you to enter your auth token.
+_To get your auth token, first [create and login to your ngrok account](https://dashboard.ngrok.com/login)_
+
+Without passing the `--token` option, a prompt will be created to enter your auth token.
 
 ## Serve Your Files
 
@@ -42,16 +43,18 @@ Or you can just run the command without passing any options and it will prompt y
 serverok serve [path]
 ```
 
-This will create an interface where you will be able to choose which files/folders to share.
-
-You can also pass port options to this command, for example:
+You can also pass these options, for example:
 
 ```bash
 serverok serve [path] --port [number] --interface-port [number]
 ```
 
-- _--port_ : the port that will be be tunneled and used to download files. (_default: 3004_)
+- _--port_ : the port that will be forwarded and used to download your file. (_default: 3004_)
 - _--interface-port_ : the port that will be used for the interface. (_default: 3000_)
+
+## Preview
+
+![interface preview](/docs/gifs/Recording%202024-06-06%20143414.gif)
 
 ## Usage
 
