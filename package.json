@@ -1,6 +1,6 @@
 {
 	"name": "serverok",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Serve your files/folder locally or over a network",
 	"main": "dist/lib/src/index.js",
 	"bin": {
