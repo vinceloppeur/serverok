@@ -20,8 +20,8 @@
           <%= filename %>
         </h3>
         <div>
-          <% if (filepath) { %>
-            <span>/<%= filepath %></span>
+          <% if (!root) { %>
+            <span><%= filepath %></span>
             <span>|</span>
           <% } %>
           <span>

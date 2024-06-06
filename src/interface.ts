@@ -58,16 +58,18 @@ export default async function main(port: number, serve_path: string) {
 	server.set("view engine", "ejs");
 
 	server
-		.route("/:position(*)")
+		.route(/./)
 		.get(async (req, res) => {
 			try {
-				const read = path.join(serve, req.params.position); // the path to read the contents inside
+				const url = req.url.split(path.posix.sep);
+				const read = path.join(serve, ...url); // the path to read the contents inside
+
 				const ent = await directoryOrFile(read, req.url);
-				const options = { root: req.params.position === "", downloadUrl: null, download: false }; // the default options
+				const options = { root: req.url === "/", downloadUrl: null, download: false }; // the default options
 
 				if (ent instanceof Buffer) {
 					return res.render("file", {
-						filepath: options.root ? undefined : req.params.position,
+						filepath: req.url,
 						filename: path.basename(read),
 						filesize: ent.byteLength,
 						...options,
@@ -81,14 +83,16 @@ export default async function main(port: number, serve_path: string) {
 		})
 		.post(async (req, res) => {
 			try {
-				const read = path.join(serve, req.params.position);
+				const url = req.url.split(path.posix.sep);
+				const read = path.join(serve, ...url);
+
 				const ent = await directoryOrFile(read, req.url);
 				const options: { root: boolean; downloadUrl: null | string; download: boolean } = {
-					root: req.params.position === "",
+					root: req.url === "/",
 					downloadUrl: null,
 					download: false,
 				};
-				const filename = path.basename(options.root ? serve : req.params.position);
+				const filename = path.basename(read);
 
 				if (ent instanceof Buffer) {
 					const file = new File([ent], filename);
@@ -98,7 +102,7 @@ export default async function main(port: number, serve_path: string) {
 						options.downloadUrl = url;
 
 						res.render("file", {
-							filepath: options.root ? undefined : filename,
+							filepath: req.url,
 							filename,
 							filesize: ent.byteLength,
 							...options,
